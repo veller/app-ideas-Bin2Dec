@@ -45,7 +45,7 @@ const AppBar = (props) => (
 
 const App = () => {
   const [binary, setBinary] = useState('')
-  const [binaryOnlyAlert, setBinaryOnlyAlert] = useState(false)
+  const [, setBinaryOnlyAlert] = useState(false)
 
   const handleBinary = event => {
     const re = /^[0-1\b]+$/
