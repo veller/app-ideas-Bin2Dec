@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { Box, Button, Heading, Grommet, Text, TextInput } from 'grommet'
 import { Bike } from 'grommet-icons'
+import styled, { keyframes } from 'styled-components'
+
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      opacity: 0;
+    }
+  `;
+}
+
+const AnimatedComponent = styled.div`
+  animation: ${blinkingEffect} 1s linear infinite;
+`
 
 const theme = {
   global: {
@@ -23,7 +36,7 @@ const AppBar = (props) => (
     align='center'
     justify='between'
     background='brand'
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
+    pad={{ left: 'medium', right: 'small', vertical: 'smal  l' }}
     elevation='medium'
     style={{ zIndex: '1' }}
     {...props}
@@ -57,51 +70,26 @@ const App = () => {
         <Box direction='column' flex overflow={{ horizontal: 'hidden' }}>
           <Box flex align='center' justify='center'>
             <Box>
-              <Heading color='heading'>Binary input:</Heading>
+              <Heading color='heading' textAlign='center'>Binary input:</Heading>
               <TextInput
                 type="text"
                 name={binary}
                 value={binary}
-                placeholder='Enter 0 or 1'
+                placeholder='Enter 0 or 1 (up to 8 digits)'
                 onChange={handleBinary}
                 maxLength={8}
               />
             </Box>
             <Box>
-              <Heading color='heading'>Decimal output:</Heading>
-              <Text size='xxlarge' textAlign='center' weight='bold' color='brand'>
+              <Heading color='heading' textAlign='center'>Decimal output:</Heading>
+              <Text size='200px' textAlign='center' weight='bold' color='brand'>
+                {!binary && <AnimatedComponent>_</AnimatedComponent>}
                 {binary && parseInt(binary, 2)}
               </Text>
             </Box>
 
           </Box>
         </Box>
-
-        <div>
-          <label>
-            Binary input:
-          <input
-              type="text"
-              name={binary}
-              value={binary}
-              placeholder='Enter 0 or 1'
-              onChange={handleBinary}
-              maxLength={8} />
-          </label>
-          {
-            binaryOnlyAlert &&
-            <div>
-              Only ones and zeroes allowed
-            </div>
-          }
-        </div>
-        <div>
-          <p>
-            Decimal output:
-            {binary && parseInt(binary, 2)}
-          </p>
-        </div>
-
       </Box>
     </Grommet>
   );
